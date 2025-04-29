@@ -8,7 +8,6 @@ export const AppContextProvider = ({ children }) => {
     const [user, setUser] = useState(true);
     const [isSeller, setIsSeller] = useState(false);
     const [showUserLogin, setShowUserLogin] = useState(false);
-    // const [showUserRegister, setShowUserRegister] = useState(false);
 
     const value = {
         navigate,
