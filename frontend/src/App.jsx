@@ -1,6 +1,7 @@
 import React from "react";
-import Navbar from "./components/Navbar";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 
 const App = () => {
@@ -9,6 +10,8 @@ const App = () => {
     return (
         <div>
             {isSellerPath ? null : <Navbar />}
+
+            <Toaster />
 
             <div
                 className={`${

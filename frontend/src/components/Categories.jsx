@@ -1,5 +1,5 @@
 import React from "react";
-import { assets, categories } from "../assets/images/assets";
+import { categories } from "../assets/images/assets";
 import { useAppContext } from "../contexts/AppContext";
 
 const Categories = () => {
