@@ -20,9 +20,9 @@ const Navbar = () => {
             </NavLink>
 
             <div className="hidden sm:flex items-center gap-8">
-                <NavLink to="/" className="hover:text-indigo-500">Home</NavLink>
-                <NavLink to="/products" className="hover:text-indigo-500">Products</NavLink>
-                <NavLink to="/" className="hover:text-indigo-500">Contact</NavLink>
+                <NavLink to="/" className="hover:text-primary">Home</NavLink>
+                <NavLink to="/products" className="hover:text-primary">Products</NavLink>
+                <NavLink to="/" className="hover:text-primary">Contact</NavLink>
 
                 <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
                     <input
@@ -35,7 +35,7 @@ const Navbar = () => {
 
                 <div onClick={() => navigate("/cart")} className="relative cursor-pointer">
                     <ShoppingCart />
-                    <button className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-[18px] h-[18px] rounded-full">
+                    <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
                         3
                     </button>
                 </div>
@@ -57,7 +57,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                 ) : (
-                    <button className="cursor-pointer px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full">
+                    <button className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
                         Login
                     </button>
                 )}
@@ -124,7 +124,7 @@ const Navbar = () => {
                             setOpen(false);
                             setShowUserLogin(true);
                         }}
-                        className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm"
+                        className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm"
                     >
                         Login
                     </button>
