@@ -32,6 +32,7 @@ import maggi_image from "./maggi_image.png";
 import dairy_product_image from "./dairy_product_image.png";
 import bakery_image from "./bakery_image.png";
 import grain_image from "./grain_image.png";
+import seafood_image from "./seafood_image.png";
 import potato_image_1 from "./potato_image_1.png";
 import potato_image_2 from "./potato_image_2.png";
 import potato_image_3 from "./potato_image_3.png";
@@ -142,6 +143,12 @@ export const categories = [
     path: "Grains",
     image: grain_image,
     bgColor: "#F1E3F9",
+  },
+  {
+    text: "Fresh Seafood",
+    path: "Seafood",
+    image: seafood_image,
+    bgColor: "#DBFFCB",
   },
 ];
 
