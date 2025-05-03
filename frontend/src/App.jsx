@@ -3,6 +3,10 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Products from "./pages/Products";
 
 const App = () => {
     const isSellerPath = useLocation().pathname.includes("seller");
@@ -20,14 +24,16 @@ const App = () => {
             >
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    {/* <Route path="/products" element={<Products />} />
-                    <Route path="/product/:id" element={<Product />} />
+                    <Route path="/products" element={<Products />} />
+                    {/* <Route path="/product/:id" element={<Product />} />
                     <Route path="/cart" element={<Cart />} />
-                    <Route path="/my-orders" element={<MyOrders />} />
+                    <Route path="/my-orders" element={<MyOrders />} /> */}
                     <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} /> */}
+                    <Route path="/register" element={<Register />} />
                 </Routes>
             </div>
+
+            {isSellerPath ? null : <Footer />}
         </div>
     );
 };
