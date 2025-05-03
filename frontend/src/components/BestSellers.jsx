@@ -68,7 +68,7 @@ const BestSellers = () => {
                             setCurrentPage((prev) => Math.max(prev - 1, 1))
                         }
                         disabled={currentPage === 1}
-                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                         Previous
                     </button>
@@ -82,7 +82,7 @@ const BestSellers = () => {
                             )
                         }
                         disabled={currentPage === totalPages}
-                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                         Next
                     </button>

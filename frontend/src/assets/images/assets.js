@@ -70,6 +70,7 @@ import vanilla_muffins_image from "./vanilla_muffins_image.png";
 import quinoa_image from "./quinoa_image.png";
 import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
+import login_image from "./login_image.jpg";
 
 export const assets = {
   logo,
@@ -99,6 +100,7 @@ export const assets = {
   bottom_banner_image_sm,
   add_address_iamge,
   box_icon,
+  login_image,
 };
 
 export const categories = [
@@ -156,10 +158,10 @@ export const footerLinks = [
   {
     title: "Quick Links",
     links: [
-      { text: "Home", url: "#" },
-      { text: "Best Sellers", url: "#" },
+      { text: "Home", url: "/" },
+      { text: "Best Sellers", url: "/" },
       { text: "Offers & Deals", url: "#" },
-      { text: "Contact Us", url: "#" },
+      { text: "Contact Us", url: "/" },
       { text: "FAQs", url: "#" },
     ],
   },

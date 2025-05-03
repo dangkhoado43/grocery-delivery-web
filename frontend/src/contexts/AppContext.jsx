@@ -1,15 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { dummyProducts } from "../assets/images/assets";
 import toast from "react-hot-toast";
+import { dummyProducts } from "../assets/images/assets";
 
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(true);
+    const [user, setUser] = useState(null);
     const [isSeller, setIsSeller] = useState(false);
-    const [showUserLogin, setShowUserLogin] = useState(false);
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState({});
     const currency = import.meta.env.VITE_CURRENCY;
@@ -72,8 +71,6 @@ export const AppContextProvider = ({ children }) => {
         navigate,
         user,
         setUser,
-        showUserLogin,
-        setShowUserLogin,
         isSeller,
         setIsSeller,
         products,
