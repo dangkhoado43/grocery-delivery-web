@@ -12,13 +12,13 @@ const App = () => {
     const isSellerPath = useLocation().pathname.includes("seller");
 
     return (
-        <div>
+        <div className="flex flex-col min-h-screen">
             {isSellerPath ? null : <Navbar />}
 
             <Toaster />
 
             <div
-                className={`${
+                className={`flex-grow ${
                     isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32 py-4"
                 }`}
             >
