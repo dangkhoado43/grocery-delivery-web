@@ -30,15 +30,6 @@ const Navbar = () => {
                     Contact
                 </NavLink>
 
-                <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-                    <input
-                        className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
-                        type="text"
-                        placeholder="Search products"
-                    />
-                    <Search />
-                </div>
-
                 <div
                     onClick={() => navigate("/cart")}
                     className="relative cursor-pointer"

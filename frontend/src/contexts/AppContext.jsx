@@ -7,6 +7,7 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [isSeller, setIsSeller] = useState(false);
     const [products, setProducts] = useState([]);
@@ -15,7 +16,14 @@ export const AppContextProvider = ({ children }) => {
 
     // Fetch all products
     const fetchProducts = async () => {
-        setProducts(dummyProducts);
+        setIsLoading(true);
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            setProducts(dummyProducts);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     // Add Product to Cart
@@ -69,6 +77,7 @@ export const AppContextProvider = ({ children }) => {
 
     const value = {
         navigate,
+        isLoading,
         user,
         setUser,
         isSeller,
@@ -78,7 +87,6 @@ export const AppContextProvider = ({ children }) => {
         currency,
         addToCart,
         cartItems,
-        setCartItems,
         updateCartItemQuantity,
         removeFromCart,
         clearCart,

@@ -1,92 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import ProductCard from "./ProductCard";
 import { useAppContext } from "../contexts/AppContext";
 
-const getProductsPerPage = (width) => {
-    if (width >= 1024) {
-        return 5;
-    } else if (width >= 640) {
-        return 3;
-    } else {
-        return 2;
-    }
-};
-
 const BestSellers = () => {
-    const { products } = useAppContext();
-    const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage, setProductsPerPage] = useState(() =>
-        getProductsPerPage(window.innerWidth)
-    );
+    const { products, isLoading } = useAppContext();
 
-    useEffect(() => {
-        const handleResize = () => {
-            setProductsPerPage(getProductsPerPage(window.innerWidth));
-        };
+    const bestSellingProducts = products
+        .filter((product) => product.inStock)
+        .slice(0, 5);
 
-        window.addEventListener("resize", handleResize);
-
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    const bestSellingProducts = products.filter((product) => product.inStock);
-
-    const totalPages = Math.ceil(bestSellingProducts.length / productsPerPage);
-
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = bestSellingProducts.slice(
-        indexOfFirstProduct,
-        indexOfLastProduct
-    );
-
-    useEffect(() => {
-        const validTotalPages = Math.max(totalPages, 1);
-
-        if (currentPage > validTotalPages) {
-            setCurrentPage(validTotalPages);
-        }
-    }, [totalPages, currentPage]);
+    if (!isLoading && bestSellingProducts.length === 0) {
+        return null;
+    }
 
     return (
         <div className="mt-16">
             <p className="text-2xl md:text-3xl font-bold">Best Sellers</p>
-            {bestSellingProducts.length === 0 ? (
-                <p>Loading best sellers...</p>
+            {isLoading && products.length === 0 ? (
+                <p className="mt-4 text-gray-600">Loading best sellers...</p>
             ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 mt-6">
-                    {currentProducts.map((product) => (
-                        <ProductCard key={product._id} product={product} />
-                    ))}
-                </div>
-            )}
-
-            {totalPages > 1 && bestSellingProducts.length > 0 && (
-                <div className="flex justify-center items-center space-x-4 mt-8">
-                    <button
-                        onClick={() =>
-                            setCurrentPage((prev) => Math.max(prev - 1, 1))
-                        }
-                        disabled={currentPage === 1}
-                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                    >
-                        Previous
-                    </button>
-                    <span>
-                        Page {currentPage} of {totalPages}
-                    </span>
-                    <button
-                        onClick={() =>
-                            setCurrentPage((prev) =>
-                                Math.min(prev + 1, totalPages)
-                            )
-                        }
-                        disabled={currentPage === totalPages}
-                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                    >
-                        Next
-                    </button>
-                </div>
+                <>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 mt-6">
+                        {bestSellingProducts.map((product) => (
+                            <ProductCard key={product._id} product={product} />
+                        ))}
+                    </div>
+                    {products.filter((p) => p.inStock).length > 5 && (
+                        <div className="text-center mt-8">
+                            <Link
+                                to="/products"
+                                className="text-emerald-600 hover:text-emerald-700 font-medium inline-flex items-center gap-1"
+                            >
+                                View All Products <ArrowRight size={18} />
+                            </Link>
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );
