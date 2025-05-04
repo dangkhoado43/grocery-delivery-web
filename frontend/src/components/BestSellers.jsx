@@ -18,7 +18,7 @@ const BestSellers = () => {
     return (
         <div className="mt-16">
             <p className="text-2xl md:text-3xl font-bold">Best Sellers</p>
-            {isLoading && products.length === 0 ? (
+            {isLoading ? (
                 <p className="mt-4 text-gray-600">Loading best sellers...</p>
             ) : (
                 <>

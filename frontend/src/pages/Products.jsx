@@ -15,7 +15,6 @@ const getProductsPerPage = (width) => {
 
 const Products = () => {
     const { products, isLoading } = useAppContext();
-
     const [searchQuery, setSearchQuery] = useState("");
 
     // Pagination
@@ -96,7 +95,7 @@ const Products = () => {
                 <p className="text-center mt-6 text-gray-600">
                     Loading products...
                 </p>
-            ) : products.length === 0 ? (
+            ) : productsInStock.length === 0 ? (
                 <p className="text-center mt-6 text-gray-600">
                     No products available at the moment.
                 </p>
@@ -106,8 +105,8 @@ const Products = () => {
                 </p>
             ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 mt-6">
-                    {currentProducts.map((product, index) => (
-                        <ProductCard key={index} product={product} />
+                    {currentProducts.map((product) => (
+                        <ProductCard key={product._id} product={product} />
                     ))}
                 </div>
             )}
