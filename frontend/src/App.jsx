@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
@@ -8,6 +7,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
 import ProductCategory from "./pages/ProductCategory";
+import ProductDetail from "./pages/ProductDetail";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
     const isSellerPath = useLocation().pathname.includes("seller");
@@ -17,6 +18,7 @@ const App = () => {
             {isSellerPath ? null : <Navbar />}
 
             <Toaster />
+            <ScrollToTop />
 
             <div
                 className={`flex-grow ${
@@ -27,6 +29,7 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/products/:category" element={<ProductCategory />} />
+                    <Route path="/products/:category/:id" element={<ProductDetail />} />
                     {/* <Route path="/cart" element={<Cart />} />
                     <Route path="/my-orders" element={<MyOrders />} /> */}
                     <Route path="/login" element={<Login />} />
