@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
 import ProductCategory from "./pages/ProductCategory";
-import ProductDetail from "./pages/ProductDetail";
+import ProductDetails from "./pages/ProductDetails";
 import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/products/:category" element={<ProductCategory />} />
-                    <Route path="/products/:category/:id" element={<ProductDetail />} />
+                    <Route path="/products/:category/:id" element={<ProductDetails />} />
                     {/* <Route path="/cart" element={<Cart />} />
                     <Route path="/my-orders" element={<MyOrders />} /> */}
                     <Route path="/login" element={<Login />} />

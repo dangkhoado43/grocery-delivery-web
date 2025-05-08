@@ -1,5 +1,6 @@
 import { ShoppingCart, Star } from "lucide-react";
 import { useAppContext } from "../contexts/AppContext";
+import StarRating from "./StarRating";
 
 const ProductCard = ({ product }) => {
     const {
@@ -32,27 +33,15 @@ const ProductCard = ({ product }) => {
                 <p className="text-gray-700 font-medium text-lg truncate w-full">
                     {product.name}
                 </p>
-                <div className="flex items-center gap-0.5">
-                    {Array(5)
-                        .fill("")
-                        .map((_, i) =>
-                            product.rating > i ? (
-                                <Star
-                                    key={i}
-                                    strokeWidth={2}
-                                    className="text-emerald-600 w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5"
-                                    fill="currentColor"
-                                />
-                            ) : (
-                                <Star
-                                    key={i}
-                                    strokeWidth={2}
-                                    className="text-emerald-100 w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5"
-                                    fill="currentColor"
-                                />
-                            )
-                        )}
-                    <p>({product.rating})</p>
+                <div className="flex items-center">
+                    <StarRating rating={product.rating} />
+                    <p className="text-sm sm:text-base ml-1 sm:ml-2">
+                        (
+                        {product.rating % 1 === 0
+                            ? product.rating
+                            : product.rating.toFixed(1)}
+                        )
+                    </p>
                 </div>
                 <div className="flex items-end justify-between mt-3">
                     <p className="md:text-xl text-base font-medium text-emerald-500">
@@ -70,7 +59,7 @@ const ProductCard = ({ product }) => {
                         {!cartItems[product._id] ? (
                             <button
                                 className="flex items-center justify-center gap-1 bg-emerald-100 border border-emerald-300 md:w-[80px] w-[64px] h-[34px] rounded text-emerald-600 font-medium cursor-pointer"
-                                onClick={() => addToCart(product)}
+                                onClick={() => addToCart(product._id)}
                             >
                                 <ShoppingCart
                                     strokeWidth={2}
@@ -81,7 +70,7 @@ const ProductCard = ({ product }) => {
                         ) : (
                             <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-emerald-500/25 rounded select-none">
                                 <button
-                                    onClick={() => removeFromCart(product)}
+                                    onClick={() => removeFromCart(product._id)}
                                     className="cursor-pointer text-md px-2 h-full"
                                 >
                                     -
@@ -92,7 +81,7 @@ const ProductCard = ({ product }) => {
                                 <button
                                     onClick={() =>
                                         updateCartItemQuantity(
-                                            product,
+                                            product._id,
                                             cartItems[product._id].quantity + 1
                                         )
                                     }
