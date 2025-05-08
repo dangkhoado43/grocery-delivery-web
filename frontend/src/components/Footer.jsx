@@ -1,4 +1,3 @@
-import React from "react";
 import { assets, footerLinks } from "../assets/images/assets";
 
 const Footer = () => {
@@ -7,7 +6,7 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-500/30 text-gray-500">
                 <div>
                     <img
-                        className="w-24 md:w-20"
+                        className="h-9"
                         src={assets.logo}
                         alt="logo"
                     />

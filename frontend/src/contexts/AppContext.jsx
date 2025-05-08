@@ -27,13 +27,19 @@ export const AppContextProvider = ({ children }) => {
     };
 
     // Add Product to Cart
-    const addToCart = async (product) => {
+    const addToCart = async (product, quantityToAdd = 1) => {
+        if (quantityToAdd <= 0) {
+            toast.error("Quantity must be greater than 0");
+
+            return;
+        }
+
         let cartData = structuredClone(cartItems);
 
         if (cartData[product._id]) {
-            cartData[product._id].quantity += 1;
+            cartData[product._id].quantity += quantityToAdd;
         } else {
-            cartData[product._id] = { ...product, quantity: 1 };
+            cartData[product._id] = { ...product, quantity: quantityToAdd };
         }
         setCartItems(cartData);
         toast.success("Added to Cart");

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { useAppContext } from "../contexts/AppContext";
 import ProductCard from "../components/ProductCard";

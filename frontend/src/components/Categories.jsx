@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { categories } from "../assets/images/assets";
 import { useAppContext } from "../contexts/AppContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
