@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import ProductCategory from "./pages/ProductCategory";
 import ProductDetails from "./pages/ProductDetails";
 import ScrollToTop from "./components/ScrollToTop";
+import Cart from "./pages/Cart";
 
 const App = () => {
     const isSellerPath = useLocation().pathname.includes("seller");
@@ -30,8 +31,8 @@ const App = () => {
                     <Route path="/products" element={<Products />} />
                     <Route path="/products/:category" element={<ProductCategory />} />
                     <Route path="/products/:category/:id" element={<ProductDetails />} />
-                    {/* <Route path="/cart" element={<Cart />} />
-                    <Route path="/my-orders" element={<MyOrders />} /> */}
+                    <Route path="/cart" element={<Cart />} />
+                    {/* <Route path="/my-orders" element={<MyOrders />} /> */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Routes>

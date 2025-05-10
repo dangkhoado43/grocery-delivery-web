@@ -887,3 +887,10 @@ export const dummyOrders = [
         updatedAt: "2025-03-25T07:17:13.068Z",
     },
 ];
+
+export const paymentMethodOptions = [
+    { value: "COD", label: "Cash On Delivery" },
+    { value: "Online", label: "Online Payment" },
+];
+
+// export const dummyReviews

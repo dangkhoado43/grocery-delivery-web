@@ -6,7 +6,7 @@ import { useAppContext } from "../contexts/AppContext";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
-    const { user, setUser, navigate } = useAppContext();
+    const { user, setUser, getCartItemCount, navigate } = useAppContext();
 
     const handleLogout = async () => {
         setUser(null);
@@ -36,7 +36,7 @@ const Navbar = () => {
                 >
                     <ShoppingCart />
                     <button className="absolute -top-2 -right-3 text-xs text-white bg-emerald-500 w-[18px] h-[18px] rounded-full">
-                        3
+                        {getCartItemCount()}
                     </button>
                 </div>
 
@@ -72,13 +72,24 @@ const Navbar = () => {
                 )}
             </div>
 
-            <button
-                onClick={() => (open ? setOpen(false) : setOpen(true))}
-                aria-label="Menu"
-                className="sm:hidden cursor-pointer"
-            >
-                <Menu />
-            </button>
+            <div className="flex items-center gap-6 sm:hidden">
+                <div
+                    onClick={() => navigate("/cart")}
+                    className="relative cursor-pointer"
+                >
+                    <ShoppingCart />
+                    <button className="absolute -top-2 -right-3 text-xs text-white bg-emerald-500 w-[18px] h-[18px] rounded-full">
+                        {getCartItemCount()}
+                    </button>
+                </div>
+                <button
+                    onClick={() => (open ? setOpen(false) : setOpen(true))}
+                    aria-label="Menu"
+                    className="sm:hidden cursor-pointer"
+                >
+                    <Menu />
+                </button>
+            </div>
 
             <div
                 className={`${
