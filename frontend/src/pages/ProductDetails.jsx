@@ -7,6 +7,7 @@ import StarRating from "../components/StarRating";
 const ProductDetail = () => {
     const {
         products,
+        isLoading,
         navigate,
         currency,
         addToCart,
@@ -22,12 +23,12 @@ const ProductDetail = () => {
     const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
-        if (product && cartItems[product._id]) {
+        if (!isLoading && product && cartItems[product._id]) {
             setQuantity(cartItems[product._id].quantity);
-        } else {
+        } else if (!isLoading && product) {
             setQuantity(1);
         }
-    }, [id, product, cartItems]);
+    }, [id, product, cartItems, isLoading]);
 
     useEffect(() => {
         if (product && products.length > 0) {
@@ -89,7 +90,33 @@ const ProductDetail = () => {
         );
     };
 
-    if (!product) {
+    const handleAddToCart = () => {
+        const currentQuantity = parseInt(quantity, 10) || 1;
+
+        if (cartItems[product._id]) {
+            updateCartItemQuantity(product._id, currentQuantity);
+        } else {
+            addToCart(product._id, currentQuantity);
+        }
+    };
+
+    const handleBuyNow = () => {
+        handleAddToCart();
+        navigate("/cart");
+    };
+
+    if (isLoading) {
+        return (
+            <div className="mt-6 md:mt-12 max-w-6xl w-full flex flex-col items-center justify-center min-h-[50vh]">
+                <p className="text-2xl text-gray-700 mb-4">
+                    Loading product details...
+                </p>
+                {/* You can add a spinner component here for better UX */}
+            </div>
+        );
+    }
+
+    if (!product && !isLoading) {
         return (
             <div className="mt-6 md:mt-12 max-w-6xl w-full flex flex-col items-center justify-center min-h-[50vh]">
                 <p className="text-2xl text-gray-700 mb-4">
@@ -207,18 +234,13 @@ const ProductDetail = () => {
 
                     <div className="flex items-center mt-6 gap-4 text-base">
                         <button
-                            onClick={() =>
-                                addToCart(product, parseInt(quantity, 10) || 1)
-                            }
+                            onClick={handleAddToCart}
                             className="w-full py-3.5 rounded cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 transition"
                         >
                             Add to Cart
                         </button>
                         <button
-                            onClick={() => {
-                                addToCart(product, parseInt(quantity, 10) || 1);
-                                navigate("/cart");
-                            }}
+                            onClick={handleBuyNow}
                             className="w-full py-3.5 rounded cursor-pointer font-medium bg-emerald-500 text-white hover:bg-emerald-600 transition"
                         >
                             Buy now

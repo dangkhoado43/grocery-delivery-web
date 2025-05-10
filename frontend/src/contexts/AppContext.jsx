@@ -19,7 +19,7 @@ export const AppContextProvider = ({ children }) => {
         setIsLoading(true);
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             setProducts(dummyProducts);
         } finally {
             setIsLoading(false);
@@ -27,7 +27,7 @@ export const AppContextProvider = ({ children }) => {
     };
 
     // Add Product to Cart
-    const addToCart = async (product, quantityToAdd = 1) => {
+    const addToCart = async (productId, quantityToAdd = 1) => {
         if (quantityToAdd <= 0) {
             toast.error("Quantity must be greater than 0");
 
@@ -35,38 +35,66 @@ export const AppContextProvider = ({ children }) => {
         }
 
         let cartData = structuredClone(cartItems);
+        const productDetails = products.find(
+            (product) => product._id === productId
+        );
 
-        if (cartData[product._id]) {
-            cartData[product._id].quantity += quantityToAdd;
-        } else {
-            cartData[product._id] = { ...product, quantity: quantityToAdd };
+        if (!productDetails) {
+            toast.error("Product not found to add to cart.");
+
+            return;
         }
+
+        if (cartData[productId]) {
+            cartData[productId].quantity += quantityToAdd;
+        } else {
+            cartData[productId] = {
+                ...productDetails,
+                quantity: quantityToAdd,
+            };
+        }
+
+        console.log(cartData);
         setCartItems(cartData);
         toast.success("Added to Cart");
     };
 
     // Update Cart Item Quantity
-    const updateCartItemQuantity = async (product, quantity) => {
+    const updateCartItemQuantity = async (productId, quantity) => {
         let cartData = structuredClone(cartItems);
 
-        if (quantity === 0) {
-            delete cartData[product._id];
-        } else {
-            cartData[product._id].quantity = quantity;
+        if (!cartData[productId]) {
+            toast.error("Product not in cart.");
+
+            return;
         }
+
+        if (quantity <= 0) {
+            delete cartData[productId];
+        } else {
+            cartData[productId].quantity = quantity;
+        }
+        console.log(cartData);
         setCartItems(cartData);
         toast.success("Cart Updated");
     };
 
     // Remove Product From Cart
-    const removeFromCart = async (product) => {
+    const removeFromCart = async (productId) => {
         let cartData = structuredClone(cartItems);
 
-        if (cartData[product._id].quantity > 1) {
-            cartData[product._id].quantity -= 1;
-        } else {
-            delete cartData[product._id];
+        if (!cartData[productId]) {
+            toast.error("Product not in cart.");
+
+            return;
         }
+
+        if (cartData[productId].quantity > 1) {
+            cartData[productId].quantity -= 1;
+        } else {
+            delete cartData[productId];
+        }
+        console.log(cartData);
         setCartItems(cartData);
         toast.success("Removed from Cart");
     };
