@@ -54,7 +54,6 @@ export const AppContextProvider = ({ children }) => {
             };
         }
 
-        console.log(cartData);
         setCartItems(cartData);
         toast.success("Added to Cart");
     };
@@ -74,7 +73,6 @@ export const AppContextProvider = ({ children }) => {
         } else {
             cartData[productId].quantity = quantity;
         }
-        console.log(cartData);
         setCartItems(cartData);
         toast.success("Cart Updated");
     };
@@ -94,7 +92,6 @@ export const AppContextProvider = ({ children }) => {
         } else {
             delete cartData[productId];
         }
-        console.log(cartData);
         setCartItems(cartData);
         toast.success("Removed from Cart");
     };
@@ -103,6 +100,29 @@ export const AppContextProvider = ({ children }) => {
     const clearCart = async () => {
         setCartItems({});
         toast.success("Cart cleared");
+    };
+
+    // Get Cart Item Count
+    const getCartItemCount = () => {
+        let totalCount = 0;
+
+        for (const productId in cartItems) {
+            totalCount += cartItems[productId].quantity;
+        }
+
+        return totalCount;
+    };
+
+    // Get Cart Total Amount
+    const getCartTotalAmount = () => {
+        let totalAmount = 0;
+
+        for (const productId in cartItems) {
+            totalAmount +=
+                cartItems[productId].quantity * cartItems[productId].offerPrice;
+        }
+
+        return Math.ceil(totalAmount * 100) / 100;
     };
 
     useEffect(() => {
@@ -119,11 +139,13 @@ export const AppContextProvider = ({ children }) => {
         products,
         setProducts,
         currency,
-        addToCart,
         cartItems,
+        addToCart,
         updateCartItemQuantity,
         removeFromCart,
         clearCart,
+        getCartItemCount,
+        getCartTotalAmount,
     };
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

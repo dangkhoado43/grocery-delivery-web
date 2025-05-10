@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useAppContext } from "../contexts/AppContext";
 import { Link, useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { useAppContext } from "../contexts/AppContext";
 import ProductCard from "../components/ProductCard";
 import StarRating from "../components/StarRating";
 
@@ -108,10 +109,10 @@ const ProductDetail = () => {
     if (isLoading) {
         return (
             <div className="mt-6 md:mt-12 max-w-6xl w-full flex flex-col items-center justify-center min-h-[50vh]">
-                <p className="text-2xl text-gray-700 mb-4">
+                <ClipLoader color={"#10B981"} loading={isLoading} size={50} />
+                <p className="text-2xl text-gray-700 mt-4">
                     Loading product details...
                 </p>
-                {/* You can add a spinner component here for better UX */}
             </div>
         );
     }
@@ -131,6 +132,10 @@ const ProductDetail = () => {
             </div>
         );
     }
+
+    const displayableRelatedProducts = relatedProducts.filter(
+        (product) => product.inStock
+    );
 
     return (
         <div className="mt-6 md:mt-12 max-w-6xl w-full">
@@ -249,27 +254,27 @@ const ProductDetail = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col items-center mt-20">
-                <div className="flex flex-col items-center w-max">
-                    <p className="text-3xl font-medium">Related Products</p>
-                    <div className="w-16 h-0.5 bg-emerald-500 rounded-full mt-2"></div>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 mt-6 w-full">
-                    {relatedProducts
-                        .filter((product) => product.inStock)
-                        .map((product) => (
+            {displayableRelatedProducts.length > 0 && (
+                <div className="flex flex-col items-center mt-20">
+                    <div className="flex flex-col items-center w-max">
+                        <p className="text-3xl font-medium">Related Products</p>
+                        <div className="w-16 h-0.5 bg-emerald-500 rounded-full mt-2"></div>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 mt-6 w-full">
+                        {displayableRelatedProducts.map((product) => (
                             <ProductCard key={product._id} product={product} />
                         ))}
+                    </div>
+                    <button
+                        onClick={() => {
+                            navigate("/products");
+                        }}
+                        className="mx-auto cursor-pointer px-12 my-16 py-2.5 border rounded text-emerald-500 font-medium hover:bg-emerald-500/10 transition"
+                    >
+                        See more
+                    </button>
                 </div>
-                <button
-                    onClick={() => {
-                        navigate("/products");
-                    }}
-                    className="mx-auto cursor-pointer px-12 my-16 py-2.5 border rounded text-emerald-500 font-medium hover:bg-emerald-500/10 transition"
-                >
-                    See more
-                </button>
-            </div>
+            )}
         </div>
     );
 };
