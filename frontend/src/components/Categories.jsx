@@ -19,7 +19,7 @@ const Categories = () => {
             <div className="relative mt-6">
                 <button
                     onClick={() => scroll(-200)}
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 transition hidden sm:block"
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 transition hidden sm:block cursor-pointer"
                 >
                     <ChevronLeft className="w-6 h-6 text-gray-700" />
                 </button>
@@ -51,7 +51,7 @@ const Categories = () => {
                         );
                     })}
                 </div>
-                <button onClick={() => scroll(200)} className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 transition hidden sm:block">
+                <button onClick={() => scroll(200)} className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 transition hidden sm:block cursor-pointer">
                     <ChevronRight className="w-6 h-6 text-gray-700" />
                 </button>
             </div>

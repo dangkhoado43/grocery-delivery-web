@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { assets } from "../assets/images/assets";
 import { Link } from "react-router-dom";
 
@@ -24,11 +25,7 @@ const MainBanner = () => {
                         className="group flex items-center gap-2 px-7 md:px-9 py-3 bg-emerald-500 hover:bg-emerald-600 transition rounded text-white cursor-pointer"
                     >
                         Shop Now
-                        <img
-                            className="md:hidden transition group-focus:translate-x-1"
-                            src={assets.white_arrow_icon}
-                            alt="arrow"
-                        />
+                        <ArrowRight className="md:hidden w-5 h-5 transition group-focus:translate-x-1" />
                     </Link>
 
                     <Link
@@ -36,11 +33,7 @@ const MainBanner = () => {
                         className="group hidden md:flex items-center gap-2 px-9 py-3 transition cursor-pointer"
                     >
                         Explore deals
-                        <img
-                            className="transition group-hover:translate-x-1"
-                            src={assets.black_arrow_icon}
-                            alt="arrow"
-                        />
+                        <ArrowRight className="w-5 h-5 transition group-hover:translate-x-1" />
                     </Link>
                 </div>
             </div>

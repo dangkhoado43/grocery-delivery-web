@@ -15,7 +15,7 @@ const Button = ({
     ...props // Allow passing other native button props
 }) => {
     const baseStyles =
-        "inline-flex items-center justify-center font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-150";
+        "inline-flex items-center justify-center font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-150 cursor-pointer";
 
     const variantStyles = {
         primary:

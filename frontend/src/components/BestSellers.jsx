@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { ClipLoader } from "react-spinners";
 import ProductCard from "./ProductCard";
 import { useAppContext } from "../contexts/AppContext";
 
@@ -18,7 +19,15 @@ const BestSellers = () => {
         <div className="mt-16">
             <p className="text-2xl md:text-3xl font-bold">Best Sellers</p>
             {isLoading ? (
-                <p className="mt-4 text-gray-600">Loading best sellers...</p>
+                <div className="flex flex-col items-center justify-center">
+                    <ClipLoader
+                        className="mt-4"
+                        color={"#10B981"}
+                        loading={isLoading}
+                        size={30}
+                    />
+                    <p className="mt-2 text-gray-600">Loading best sellers...</p>
+                </div>
             ) : (
                 <>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 mt-6">
@@ -30,9 +39,10 @@ const BestSellers = () => {
                         <div className="text-center mt-8">
                             <Link
                                 to="/products"
-                                className="text-emerald-600 hover:text-emerald-700 font-medium inline-flex items-center gap-1"
+                                className="group text-emerald-600 hover:text-emerald-700 font-medium inline-flex items-center gap-1"
                             >
-                                View All Products <ArrowRight size={18} />
+                                View All Products{" "}
+                                <ArrowRight className="w-5 h-5 transition group-hover:translate-x-1" />
                             </Link>
                         </div>
                     )}
