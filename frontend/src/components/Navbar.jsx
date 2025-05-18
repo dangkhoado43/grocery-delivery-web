@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { assets } from "../assets/images/assets";
-import { Menu, Search, ShoppingCart } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
 import { useAppContext } from "../contexts/AppContext";
 
 const Navbar = () => {

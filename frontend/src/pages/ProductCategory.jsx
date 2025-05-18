@@ -4,6 +4,7 @@ import { useAppContext } from "../contexts/AppContext";
 import { categories } from "../assets/images/assets";
 import ProductCard from "../components/ProductCard";
 import { Search } from "lucide-react";
+import { ClipLoader } from "react-spinners";
 
 const getProductsPerPage = (width) => {
     if (width >= 1024) {
@@ -104,9 +105,14 @@ const ProductCategory = () => {
             </div>
 
             {isLoading ? (
-                <p className="text-center mt-6 text-gray-600">
-                    Loading products...
-                </p>
+                <div className="flex flex-col items-center justify-center mt-6">
+                    <ClipLoader
+                        color={"#10B981"}
+                        loading={isLoading}
+                        size={30}
+                    />
+                    <p className="mt-2 text-gray-600">Loading products...</p>
+                </div>
             ) : productsInCategory.length === 0 ? (
                 <div className="text-center mt-6 text-gray-600">
                     No products found in this category.

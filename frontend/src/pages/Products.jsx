@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { useAppContext } from "../contexts/AppContext";
 import ProductCard from "../components/ProductCard";
+import { ClipLoader } from "react-spinners";
 
 const getProductsPerPage = (width) => {
     if (width >= 1024) {
@@ -92,9 +93,14 @@ const Products = () => {
             </div>
 
             {isLoading ? (
-                <p className="text-center mt-6 text-gray-600">
-                    Loading products...
-                </p>
+                <div className="flex flex-col items-center justify-center mt-6">
+                    <ClipLoader
+                        color={"#10B981"}
+                        loading={isLoading}
+                        size={50}
+                    />
+                    <p className="mt-2 text-gray-600">Loading products...</p>
+                </div>
             ) : productsInStock.length === 0 ? (
                 <p className="text-center mt-6 text-gray-600">
                     No products available at the moment.
